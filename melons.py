@@ -1,4 +1,5 @@
 import string
+import random
 
 """Classes for melon orders."""
 # Write a parent class for abstract melon
@@ -14,10 +15,17 @@ class AbstractMelonOrder():
         self.country_code = country_code
         self.shipped = False
 
+
+    def get_base_price(self): 
+        """Randomizes base price"""
+
+        return random.randint(5,9)
+    
     def get_total(self):
         """Calculate price, including tax."""
 
-        base_price = 5
+        base_price = self.get_base_price()
+
         if self.species.lower() == 'christmas melon':
             base_price = base_price * 1.5
 
@@ -58,6 +66,11 @@ class GovernmentMelonOrder(AbstractMelonOrder):
 
     def marked_inspection(self, passed):
         self.passed_inspection = passed
+
+
+
+if __name__ == "__main__":
+    melons0 = GovernmentMelonOrder('Christmas Melon', 10)
 
 
 
