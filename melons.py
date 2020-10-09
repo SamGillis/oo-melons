@@ -1,3 +1,5 @@
+import string
+
 """Classes for melon orders."""
 # Write a parent class for abstract melon
 # Get rid of repetitive code in DomesticMelonOrder and Int'l Melon Order
@@ -16,7 +18,14 @@ class AbstractMelonOrder():
         """Calculate price, including tax."""
 
         base_price = 5
-        total = (1 + self.tax) * self.qty * base_price
+        if self.species.lower() == 'christmas melon':
+            base_price = base_price * 1.5
+
+        fee = 0
+        if self.country_code != 'USA' and self.qty < 10:
+            fee = 3
+
+        total = (1 + self.tax) * self.qty * base_price + fee
 
         return total
      
